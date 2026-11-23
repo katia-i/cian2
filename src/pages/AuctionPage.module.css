@@ -1,0 +1,640 @@
+.page {
+  min-height: 100dvh;
+  padding: 24px;
+  display: grid;
+  place-items: center;
+  background: #e6f0ff;
+}
+
+.phone {
+  width: min(100%, 440px);
+  height: min(900px, calc(100dvh - 48px));
+  padding: 9px;
+  overflow: hidden;
+  border-radius: 54px;
+  background: #041d3f;
+  box-shadow: 0 24px 60px #041d3f40;
+}
+
+.phoneScreen {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  border-radius: 46px;
+  background: #e6f0ff;
+  display: flex;
+  flex-direction: column;
+}
+
+.statusBar {
+  height: 42px;
+  padding: 10px 21px 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  color: #041d3f;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+}
+
+.statusIcons {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  padding-top: 4px;
+}
+
+.signal {
+  height: 10px;
+  display: flex;
+  align-items: flex-end;
+  gap: 1px;
+}
+
+.signal i {
+  width: 2px;
+  display: block;
+  border-radius: 1px;
+  background: #041d3f;
+}
+
+.signal i:nth-child(1) {
+  height: 3px;
+}
+
+.signal i:nth-child(2) {
+  height: 5px;
+}
+
+.signal i:nth-child(3) {
+  height: 7px;
+}
+
+.signal i:nth-child(4) {
+  height: 9px;
+}
+
+.wifi {
+  width: 12px;
+  height: 9px;
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.wifi::before,
+.wifi::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1.5px solid #041d3f;
+  border-radius: 50%;
+}
+
+.wifi::before {
+  width: 12px;
+  height: 12px;
+  top: -8px;
+}
+
+.wifi::after {
+  width: 4px;
+  height: 4px;
+  bottom: -2px;
+  border: 0;
+  background: #041d3f;
+}
+
+.battery {
+  width: 18px;
+  height: 9px;
+  position: relative;
+  display: block;
+  padding: 1px;
+  border: 1px solid #041d3f;
+  border-radius: 3px;
+}
+
+.battery::after {
+  width: 2px;
+  height: 4px;
+  content: '';
+  position: absolute;
+  right: -4px;
+  top: 2px;
+  border-radius: 0 1px 1px 0;
+  background: #041d3f;
+}
+
+.battery i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 1px;
+  background: #041d3f;
+}
+
+.dynamicIsland {
+  width: 112px;
+  height: 31px;
+  position: absolute;
+  z-index: 2;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 20px;
+  background: #041d3f;
+}
+
+.homeIndicator {
+  width: 120px;
+  height: 5px;
+  position: absolute;
+  bottom: 9px;
+  left: calc(50% - 60px);
+  display: block;
+  margin: -14px auto 9px;
+  border-radius: 5px;
+  background: #041d3f;
+}
+
+.header {
+  height: 60px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+}
+
+.brand img {
+  width: 100px;
+  height: auto;
+}
+
+.kitLink {
+  font-size: 14px;
+  color: #31547f;
+}
+
+.mobileShell {
+  flex: 1;
+  width: min(100%, 480px);
+  margin: 0 auto;
+  padding: 0 16px 40px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.mobileShell::-webkit-scrollbar {
+  display: none;
+}
+
+.demoButtons button,
+.demoPanel > button,
+.backLink button,
+.roleCards button,
+.photoControls button {
+  font: inherit;
+  border: 0;
+  cursor: pointer;
+}
+
+.eyebrow {
+  margin: 24px 4px 10px;
+  color: #31547f;
+  letter-spacing: 0.2px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.apartment,
+.apartmentCompact,
+.card,
+.demoPanel {
+  border: 1px solid #d9e4ff;
+  background: var(--background-elevation);
+  box-shadow: 0 14px 30px #041d3f14;
+}
+
+.apartment,
+.apartmentCompact {
+  overflow: hidden;
+  border-radius: 16px;
+  display: grid;
+  grid-template-columns: 130px minmax(0, 1fr);
+}
+
+.apartmentCompact {
+  grid-template-columns: 88px minmax(0, 1fr);
+  border-radius: 12px;
+}
+
+.photos {
+  position: relative;
+  min-height: 136px;
+  overflow: hidden;
+  background: var(--surface-neutral-default);
+}
+
+.apartmentCompact .photos {
+  min-height: 88px;
+}
+
+.photos img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+}
+
+.photoControls {
+  position: absolute;
+  bottom: 9px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.photoControls button {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border-radius: 50%;
+  background: #ffffffaa;
+}
+
+.photoControls .activePhoto {
+  width: 18px;
+  border-radius: 5px;
+  background: var(--solid-white, #fff);
+}
+
+.apartmentBody {
+  padding: 16px;
+  min-width: 0;
+}
+
+.apartmentBody h2 {
+  font-size: 16px;
+  line-height: 21px;
+}
+
+.apartmentBody p,
+.apartmentBody span {
+  display: block;
+  margin-top: 5px;
+  color: var(--text-secondary-default);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.card {
+  margin-top: 16px;
+  padding: 20px 16px 16px;
+  border-radius: 16px;
+}
+
+.card h1 {
+  margin-top: 12px;
+  font-size: 25px;
+  line-height: 31px;
+  letter-spacing: -0.6px;
+}
+
+.roleCards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.roleCards button {
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr) 20px;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  border: 1px solid #d6e2ff;
+  border-radius: 12px;
+  color: var(--text-primary-default);
+  background: #f7faff;
+  text-align: left;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease;
+}
+
+.roleCards button:hover {
+  transform: translateY(-2px);
+  border-color: #0054fd;
+  box-shadow: 0 10px 18px #0054fd1f;
+}
+
+.roleCards .sellerChoice {
+  border-color: #b9cdfd;
+}
+
+.roleCards .buyerChoice {
+  background: #eef4ff;
+}
+
+.roleCards span {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.roleCards strong {
+  font-size: 15px;
+}
+
+.roleCards small {
+  color: var(--text-secondary-default);
+  font-size: 13px;
+}
+
+.lead {
+  margin: 12px 0 24px;
+  color: var(--text-secondary-default);
+}
+
+.sellerBenefits {
+  margin: -6px 0 22px;
+  display: grid;
+  gap: 8px;
+}
+
+.sellerBenefits span,
+.buyerMomentum {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #041d3f;
+  font-size: 13px;
+}
+
+.sellerBenefits span {
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #eef4ff;
+}
+
+.sellerBenefits > span > span:first-child,
+.buyerMomentum > span:first-child {
+  color: #0054fd;
+  flex: none;
+}
+
+.buyerMomentum {
+  margin: 16px 0 0;
+  padding: 12px;
+  border: 1px solid #bed1ff;
+  border-radius: 12px;
+  background: #edf3ff;
+}
+
+.buyerMomentum span {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.buyerMomentum strong {
+  font-size: 13px;
+}
+
+.buyerMomentum small {
+  color: var(--text-secondary-default);
+  font-size: 12px;
+}
+
+.form,
+.bidForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.backLink {
+  margin: 0 0 20px;
+}
+
+.backLink button {
+  padding: 0;
+  color: var(--text-main-default);
+  background: transparent;
+  font-size: 14px;
+}
+
+.reviewList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 22px 0 18px;
+}
+
+.reviewList span {
+  padding: 14px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--stroke-divider-default);
+  color: var(--text-secondary-default);
+  font-size: 14px;
+}
+
+.reviewList b {
+  color: var(--text-primary-default);
+  text-align: right;
+}
+
+.privateNote,
+.bidHint {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin: 16px 0 22px;
+  color: var(--text-secondary-default);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.privateNote :global(.icon) {
+  flex: none;
+}
+
+.summary {
+  margin: 20px 0 2px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--stroke-divider-default);
+}
+
+.summary > div {
+  min-height: 78px;
+  padding: 13px 8px 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  border-bottom: 1px solid var(--stroke-divider-default);
+}
+
+.summary .currentBid {
+  margin: 10px 0 0;
+  padding: 14px 12px;
+  border: 0;
+  border-radius: 12px;
+  background: #0054fd;
+  color: #fff;
+}
+
+.summary .currentBid span {
+  color: #ffffffbf;
+}
+
+.summary .currentBid strong {
+  color: #fff;
+  font-size: 21px;
+}
+
+.summary > div:nth-child(even) {
+  padding-left: 12px;
+  border-left: 1px solid var(--stroke-divider-default);
+}
+
+.summary .currentBid + div {
+  margin-top: 10px;
+  padding-top: 14px;
+}
+
+.summary span {
+  color: var(--text-secondary-default);
+  font-size: 12px;
+}
+
+.summary strong {
+  font-size: 19px;
+  letter-spacing: -0.2px;
+}
+
+.summary b {
+  font-size: 13px;
+}
+
+.summary .reserveState {
+  grid-column: 1 / -1;
+  min-height: auto;
+  padding: 12px 0;
+  border-left: 0;
+}
+
+.messageSuccess,
+.messageError {
+  margin: 22px 0 0;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+.messageSuccess {
+  display: flex;
+  gap: 10px;
+  background: var(--surface-positive-default);
+  color: var(--text-positive-default);
+}
+
+.messageError {
+  border: 1px solid var(--stroke-border-negative);
+  background: var(--surface-negative-default);
+  color: var(--text-negative-default);
+}
+
+.messageSuccess p,
+.messageError p {
+  margin: 3px 0 0;
+}
+
+.demoPanel {
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 12px;
+  background: #f4f7ff;
+}
+
+.demoPanel > span {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--text-secondary-default);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1px;
+}
+
+.demoButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.demoButtons button,
+.demoPanel > button {
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--background-primary);
+  color: var(--text-primary-default);
+  border: 1px solid var(--stroke-border-default);
+  font-size: 13px;
+}
+
+.demoButtons .demoSelected {
+  border-color: #0054fd;
+  background: #e6efff;
+  color: #0041c7;
+}
+
+@media (max-width: 360px) {
+  .page {
+    padding: 0;
+  }
+
+  .phone {
+    width: 100%;
+    height: 100dvh;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .phoneScreen {
+    border-radius: 0;
+  }
+
+  .mobileShell {
+    padding-inline: 12px;
+  }
+
+  .card {
+    padding-inline: 16px;
+  }
+
+  .summary {
+    grid-template-columns: 1fr;
+  }
+
+  .summary > div:nth-child(even) {
+    padding-left: 0;
+    border-left: 0;
+  }
+}
