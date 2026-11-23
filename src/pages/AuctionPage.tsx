@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Badge, Button, Icon, Input } from '@/ui';
+import { trackAuctionGoal, type AuctionRole } from '@/analytics/metrika';
 import s from './AuctionPage.module.css';
 
-type Role = 'seller' | 'buyer';
+type Role = Exclude<AuctionRole, 'guest'>;
 type AuctionPhase = 'draft' | 'form' | 'review' | 'live' | 'ended';
 type BidResult = 'idle' | 'pending' | 'accepted' | 'error';
 type Outcome = 'sold' | 'unsold' | null;
@@ -168,10 +169,16 @@ export function AuctionPage() {
   };
 
   const reviewAuction = () => {
-    if (validateTerms()) setPhase('review');
+    if (validateTerms()) {
+      trackAuctionGoal('auction_terms_reviewed', { role: 'seller', step: 'terms_review' });
+      setPhase('review');
+    } else {
+      trackAuctionGoal('auction_terms_validation_error', { role: 'seller', step: 'terms_form' });
+    }
   };
 
   const publishAuction = () => {
+    trackAuctionGoal('auction_published', { role: 'seller', step: 'auction_live' });
     setCurrentBid(numbers.start);
     setBids(0);
     setBidResult('idle');
@@ -182,23 +189,40 @@ export function AuctionPage() {
   const submitBid = () => {
     const value = Number(bidValue);
     if (!Number.isFinite(value) || value < minimumBid) {
+      trackAuctionGoal('auction_bid_validation_error', { role: 'buyer', step: 'bid_form' });
       setBidError(`Минимальная ставка — ${formatPrice(minimumBid)}`);
       return;
     }
     setBidError('');
+    trackAuctionGoal('auction_bid_attempted', { role: 'buyer', step: 'bid_pending' });
     setBidResult('pending');
     window.setTimeout(() => {
       if (responseMode === 'error') {
+        trackAuctionGoal('auction_bid_response', {
+          role: 'buyer',
+          step: 'bid_error',
+          result: 'error',
+        });
         setBidResult('error');
         return;
       }
       setCurrentBid(value);
       setBids((count) => count + 1);
       setBidResult('accepted');
+      trackAuctionGoal('auction_bid_response', {
+        role: 'buyer',
+        step: 'bid_success',
+        result: 'success',
+      });
     }, 900);
   };
 
   const finishAuction = (nextOutcome: Exclude<Outcome, null>) => {
+    trackAuctionGoal('auction_finished', {
+      role: role ?? 'guest',
+      step: 'auction_finished',
+      outcome: nextOutcome,
+    });
     if (nextOutcome === 'sold') {
       setCurrentBid(Math.max(currentBid, numbers.reserve));
       setBids((count) => Math.max(count, 1));
@@ -209,6 +233,7 @@ export function AuctionPage() {
   };
 
   const resetPrototype = () => {
+    trackAuctionGoal('auction_restarted', { role: role ?? 'guest', step: 'role_choice' });
     setTerms(initialTerms);
     setErrors({});
     setCurrentBid(Number(initialTerms.startPrice));
@@ -222,6 +247,10 @@ export function AuctionPage() {
   };
 
   const chooseRole = (nextRole: Role) => {
+    trackAuctionGoal('auction_role_selected', {
+      role: nextRole,
+      step: 'role_choice',
+    });
     setRole(nextRole);
     if (nextRole === 'buyer') {
       setPhase('live');
@@ -289,7 +318,14 @@ export function AuctionPage() {
             <Icon name="FunctionalCalendar24" size={18} /> Публикация займёт около 3 минут
           </span>
         </div>
-        <Button fullWidth size="L" onClick={() => setPhase('form')}>
+        <Button
+          fullWidth
+          size="L"
+          onClick={() => {
+            trackAuctionGoal('auction_terms_opened', { role: 'seller', step: 'terms_form' });
+            setPhase('form');
+          }}
+        >
           Задать условия аукциона
         </Button>
       </section>
@@ -526,9 +562,14 @@ export function AuctionPage() {
             <a className={s.brand} href="/" aria-label="Циан — главная">
               <img src="/assets/cian-logo.svg" alt="Циан" />
             </a>
-            <a className={s.kitLink} href="/ui-kit">
-              UI kit
-            </a>
+            <div className={s.headerActions}>
+              <a className={s.kitLink} href="/ui-kit">
+                UI kit
+              </a>
+              <a className={s.mapLink} href="/map">
+                Карта
+              </a>
+            </div>
           </header>
           <div className={s.mobileShell}>
             <div className={s.eyebrow}>Демонстрационный прототип</div>
