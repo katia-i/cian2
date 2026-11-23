@@ -1,0 +1,16 @@
+/* Профиль ролика: значения взяты из токенов и мобильного прототипа Циана. */
+@font-face{font-family:'Cian Lato';src:url('fonts/Lato-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:block}
+@font-face{font-family:'Cian Lato';src:url('fonts/Lato-Semibold.woff2') format('woff2');font-weight:600;font-style:normal;font-display:block}
+@font-face{font-family:'Cian Lato';src:url('fonts/Lato-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:block}
+
+:root{
+  --font:'Cian Lato',Arial,sans-serif;
+  --w-regular:400; --w-medium:600; --w-bold:700;
+  --accent:#0054fd; --accent-ink:#fff;
+  --ink:#041d3f; --ink2:#31547f; --ink3:#7389a8;
+  --line:#d9e4ff; --line2:#b9cdfd; --soft:#eef4ff;
+  --dark:#041d3f; --surface:#fff; --bg:#e6f0ff;
+  --dim:4,29,63; --sub-bg:rgba(4,29,63,.88); --cursor:#041d3f;
+  --r-app:28px;
+  --ring-stops:#0054fd,#2974ff,#75a4ff,#2974ff,#0054fd;
+}
